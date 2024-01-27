@@ -1,6 +1,8 @@
 package com.Client.Client.Controller;
 
 
+import com.Client.Client.Dto.BalanceRequestDto;
+import com.Client.Client.Entity.ClientEntity;
 import com.Client.Client.Service.Impl.ClientService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +29,21 @@ public class ClientController {
         return ResponseEntity.badRequest().body(" Client not autorized! ");
     }
 
-    @GetMapping("/addbalance")
-    public ResponseEntity<String> add(@RequestHeader("Internal-ID") String internalId, String id, Long balance){
+    @PostMapping("/addbalance")
+    public ResponseEntity<String> add(@RequestHeader("Internal-ID") String internalId, @RequestBody BalanceRequestDto balanceRequestDto){
         if (internalId.equals(SECRET_PASS)){
-            return clientService.addBalance(id, balance);
+            return clientService.addBalance(balanceRequestDto);
         }
         return ResponseEntity.badRequest().body(" Add not autorized! ");
+    }
+
+    @PostMapping("/createUser")
+    public ResponseEntity<ClientEntity> create(@RequestHeader("Internal-ID") String internalId, @RequestBody ClientEntity clientEntity){
+        if (internalId.equals(SECRET_PASS)){
+            var client = clientService.createClient(clientEntity);
+            return client;
+        }
+        return  null;
     }
 
 }

@@ -9,9 +9,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-@Data
-@Getter
-@Setter
 public class ClientEntity {
 
     @Id
@@ -21,4 +18,23 @@ public class ClientEntity {
 
     private Long balance;
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
+    }
 }

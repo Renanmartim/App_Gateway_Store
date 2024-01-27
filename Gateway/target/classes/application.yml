@@ -1,3 +1,5 @@
 server:
   port: 8086
 
+secret-pass: d27ebf97-5079-4a0b-b11d-5f39e0218a7c
+
