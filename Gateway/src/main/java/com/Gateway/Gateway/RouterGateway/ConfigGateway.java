@@ -24,8 +24,12 @@ public class ConfigGateway {
                                 .addRequestHeader("Internal-ID", SECRET_PASS))
                         .uri("http://localhost:8081/"))
                 .route("addbalance", r -> r.path("/client/addbalance")
+                        .filters(f -> f
+                                .addRequestHeader("Internal-ID", SECRET_PASS))
                         .uri("http://localhost:8081/"))
                 .route("addProduct", r -> r.path("/store/addProduct")
+                        .filters(f -> f
+                                .addRequestHeader("Internal-ID", SECRET_PASS))
                         .uri("http://localhost:8082/"))
                 .build();
     }
