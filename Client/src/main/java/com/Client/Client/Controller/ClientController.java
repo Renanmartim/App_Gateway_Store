@@ -1,6 +1,7 @@
 package com.Client.Client.Controller;
 
 
+import com.Client.Client.Service.Impl.ClientService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("client")
 public class ClientController {
+
+
+    private ClientService clientService;
+    private ClientController(ClientService clientService){
+        this.clientService = clientService;
+
+    }
 
     @Value("${secret-pass}")
     private String SECRET_PASS;
@@ -20,9 +28,9 @@ public class ClientController {
     }
 
     @GetMapping("/addbalance")
-    public ResponseEntity<String> add(@RequestHeader("Internal-ID") String internalId){
+    public ResponseEntity<String> add(@RequestHeader("Internal-ID") String internalId, String id, Long balance){
         if (internalId.equals(SECRET_PASS)){
-            return ResponseEntity.ok().body(" Add autorized and complete! ");
+            return clientService.addBalance(id, balance);
         }
         return ResponseEntity.badRequest().body(" Add not autorized! ");
     }
