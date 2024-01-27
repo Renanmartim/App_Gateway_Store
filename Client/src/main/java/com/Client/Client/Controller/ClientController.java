@@ -2,8 +2,10 @@ package com.Client.Client.Controller;
 
 
 import com.Client.Client.Dto.BalanceRequestDto;
+import com.Client.Client.Dto.ClientBuyDto;
+import com.Client.Client.Dto.ClientNotBalanceDto;
 import com.Client.Client.Entity.ClientEntity;
-import com.Client.Client.Service.Impl.ClientService;
+import com.Client.Client.Service.Impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class ClientController {
 
 
-    private ClientService clientService;
-    private ClientController(ClientService clientService){
+    private ClientServiceImpl clientService;
+    private ClientController(ClientServiceImpl clientService){
         this.clientService = clientService;
 
     }
@@ -37,6 +39,14 @@ public class ClientController {
         return ResponseEntity.badRequest().body(" Add not autorized! ");
     }
 
+    @PostMapping("/subtractbalance")
+    public ResponseEntity<String> subtract(@RequestHeader("Internal-ID") String internalId, @RequestBody BalanceRequestDto balanceRequestDto){
+        if (internalId.equals(SECRET_PASS)){
+            return clientService.subtractBalance(balanceRequestDto);
+        }
+        return ResponseEntity.badRequest().body(" Add not autorized! ");
+    }
+
     @PostMapping("/createUser")
     public ResponseEntity<ClientEntity> create(@RequestHeader("Internal-ID") String internalId, @RequestBody ClientEntity clientEntity){
         if (internalId.equals(SECRET_PASS)){
@@ -44,6 +54,14 @@ public class ClientController {
             return client;
         }
         return  null;
+    }
+
+    @PostMapping("/clientpurshase")
+    public ResponseEntity<String> purshase(@RequestHeader("Internal-ID") String internalId, @RequestBody ClientNotBalanceDto clientNotBalanceDto){
+        if (internalId.equals(SECRET_PASS)){
+            return clientService.buyInStore(clientNotBalanceDto);
+        }
+        return ResponseEntity.badRequest().body(" Not autorized! ");
     }
 
 }

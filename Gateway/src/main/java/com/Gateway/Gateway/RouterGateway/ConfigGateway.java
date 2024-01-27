@@ -40,6 +40,22 @@ public class ConfigGateway {
                         .filters(f -> f
                                 .addRequestHeader("Internal-ID", SECRET_PASS))
                         .uri("http://localhost:8081/"))
+                .route("getAll", r -> r.path("/store/getAll")
+                        .filters(f -> f
+                                .addRequestHeader("Internal-ID", SECRET_PASS))
+                        .uri("http://localhost:8082/"))
+                .route("clientBuy", r -> r.path("/store/clientBuy")
+                        .filters(f -> f
+                                .addRequestHeader("Internal-ID", SECRET_PASS))
+                        .uri("http://localhost:8082/"))
+                .route("subtractbalance", r -> r.path("/client/subtractbalance")
+                        .filters(f -> f
+                                .addRequestHeader("Internal-ID", SECRET_PASS))
+                        .uri("http://localhost:8081/"))
+                .route("clientpurshase", r -> r.path("/client/clientpurshase")
+                        .filters(f -> f
+                                .addRequestHeader("Internal-ID", SECRET_PASS))
+                        .uri("http://localhost:8081/"))
                 .build();
     }
 }

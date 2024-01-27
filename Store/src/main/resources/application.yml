@@ -2,3 +2,9 @@ server:
   port: 8082
 
 secret-pass: d27ebf97-5079-4a0b-b11d-5f39e0218a7c
+
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/Store
