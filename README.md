@@ -30,11 +30,11 @@ This project demonstrates a simple microservices architecture with a Gateway, Cl
     - Subtracts the purchase amount from the customer's wallet.
     - Requires the `Internal-ID` header for authorization and BalanceRequestDto.
    
-    - **POST `/createUser`**
+  - **POST `/createUser`**
     - Create user.
     - Requires the `Internal-ID` header for authorization and ClientEntity.
 
-    - **POST `/clientpurshase`**
+  - **POST `/clientpurshase`**
     - Make a request to the Store to purchase the product.
     - Requires the `Internal-ID` header for authorization and ClientNotBalanceDto.
 
@@ -63,7 +63,7 @@ This project demonstrates a simple microservices architecture with a Gateway, Cl
     - Path: `/store/addProduct`
     - Forward requests to `http://localhost:8082/`.
    
-    - **Route: `store`**
+  - **Route: `store`**
     - Path: `/store`
     - Forward requests to `http://localhost:8082/`.
    
@@ -83,11 +83,11 @@ This project demonstrates a simple microservices architecture with a Gateway, Cl
     - Adds a product to the Store service.
     - Requires the `Internal-ID` header for authorization and StoreEntity object.
 
-    - **GET `/getAll`**
+  - **GET `/getAll`**
     - Returns all products from the store.
     - Requires the `Internal-ID` header for authorization.
    
-      - **POST `/clientBuy`**
+  - **POST `/clientBuy`**
     - Makes the purchase, updates the value in the customer's inventory and wallet using /client/subtractbalance using the correct route in the gateway.
     - Requires the `Internal-ID` header for authorization and ClientBuyDto.
 
