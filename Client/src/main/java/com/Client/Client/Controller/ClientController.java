@@ -23,13 +23,6 @@ public class ClientController {
 
     @Value("${secret-pass}")
     private String SECRET_PASS;
-    @GetMapping()
-    public ResponseEntity<String> getAll(@RequestHeader("Internal-ID") String internalId){
-        if (internalId.equals(SECRET_PASS)){
-            return ResponseEntity.ok().body(" Client autorized! ");
-        }
-        return ResponseEntity.badRequest().body(" Client not autorized! ");
-    }
 
     @PostMapping("/addbalance")
     public ResponseEntity<String> add(@RequestHeader("Internal-ID") String internalId, @RequestBody BalanceRequestDto balanceRequestDto){
